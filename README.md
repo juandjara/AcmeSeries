@@ -12,3 +12,5 @@ This project uses the following technologies:
 - JQuery
 - Apache Tiles
 - JSP
+
+You can use <code>maven</code> to download the dependencies of this project
