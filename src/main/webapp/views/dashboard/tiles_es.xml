@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles_es.xml
+ *
+ * Copyright (C) 2013 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      
+<tiles-definitions>
+	
+	<definition name="dashboard/generic" extends="master.page">	
+		<put-attribute name="title" value="Panel genérico" />
+		<put-attribute name="body" value="/views/dashboard/generic.jsp" />
+	</definition>
+	
+	<definition name="dashboard/admin" extends="master.page">	
+		<put-attribute name="title" value="Panel de administrador" />
+		<put-attribute name="body" value="/views/dashboard/admin.jsp" />
+	</definition>
+	
+	<definition name="dashboard/producer" extends="master.page">	
+		<put-attribute name="title" value="Panel de productor" />
+		<put-attribute name="body" value="/views/dashboard/producer.jsp" />
+	</definition>
+	
+	<definition name="dashboard/customer" extends="master.page">	
+		<put-attribute name="title" value="Panel de cliente" />
+		<put-attribute name="body" value="/views/dashboard/customer.jsp" />
+	</definition>
+	
+</tiles-definitions>

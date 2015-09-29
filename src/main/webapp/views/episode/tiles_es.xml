@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles_es.xml
+ *
+ * Copyright (C) 2013 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      
+<tiles-definitions>
+	
+	<definition name="episode/list" extends="master.page">	
+		<put-attribute name="title" value="Lista de episodios" />
+		<put-attribute name="body" value="/views/episode/list.jsp" />
+	</definition>
+	
+	<definition name="episode/details" extends="master.page">	
+		<put-attribute name="title" value="Detalles del episodio" />
+		<put-attribute name="body" value="/views/episode/details.jsp" />
+	</definition>
+	
+	<definition name="episode/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar un episodio" />
+		<put-attribute name="body" value="/views/episode/edit.jsp" />
+	</definition>
+	
+	
+</tiles-definitions>

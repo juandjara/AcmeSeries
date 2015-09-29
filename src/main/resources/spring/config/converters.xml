@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * converters.xml
+ *
+ * Copyright (C) 2014 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd		
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd		
+	">
+
+	<util:list id="converters">
+		<!-- Entity to String -->
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.AdministratorToStringConverter" />
+		<bean class="converters.CommentToStringConverter" />
+		<bean class="converters.ContentToStringConverter" />
+		<bean class="converters.CustomerToStringConverter" />
+		<bean class="converters.EpisodeToStringConverter" />
+		<bean class="converters.FilmToStringConverter" />
+		<bean class="converters.MarkToStringConverter" />
+		<bean class="converters.MultimediaToStringConverter" />
+		<bean class="converters.ProducerCompanyToStringConverter" />
+		<bean class="converters.RoleToStringConverter" />
+		<bean class="converters.StaffToStringConverter" />
+		<bean class="converters.TVSerieToStringConverter" />
+		
+		<!-- String to Entity -->
+		<bean class="converters.StringToActorConverter" />
+		<bean class="converters.StringToAdministratorConverter" />
+		<bean class="converters.StringToCommentConverter" />
+		<bean class="converters.StringToContentConverter" />
+		<bean class="converters.StringToCustomerConverter" />
+		<bean class="converters.StringToEpisodeConverter" />
+		<bean class="converters.StringToFilmConverter" />
+		<bean class="converters.StringToMarkConverter" />
+		<bean class="converters.StringToMultimediaConverter" />
+		<bean class="converters.StringToProducerCompanyConverter" />
+		<bean class="converters.StringToRoleConverter" />
+		<bean class="converters.StringToStaffConverter" />
+		<bean class="converters.StringToTVSerieConverter" />
+	</util:list>
+	
+</beans>

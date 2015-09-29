@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles_es.xml
+ *
+ * Copyright (C) 2013 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      
+<tiles-definitions>
+
+	<definition name="comment/list" extends="master.page">	
+		<put-attribute name="title" value="Lista de comentarios" />
+		<put-attribute name="body" value="/views/comment/list.jsp" />
+	</definition>
+	
+	<definition name="comment/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar un comentarios" />
+		<put-attribute name="body" value="/views/comment/edit.jsp" />
+	</definition>
+	
+	<definition name="comment/details" extends="master.page">	
+		<put-attribute name="title" value="Detalles de un comentario" />
+		<put-attribute name="body" value="/views/comment/details.jsp" />
+	</definition>
+	
+	<definition name="comment/replies" extends="master.page">	
+		<put-attribute name="title" value="Respuestas a un comentario" />
+		<put-attribute name="body" value="/views/comment/list.jsp" />
+	</definition>
+	
+	<definition name="comment/outbox" extends="master.page">	
+		<put-attribute name="title" value="Mis comentarios" />
+		<put-attribute name="body" value="/views/comment/list.jsp" />
+	</definition>
+	
+	<definition name="comment/inbox" extends="master.page">	
+		<put-attribute name="title" value="Bandeja de entrada de recomendaciones" />
+		<put-attribute name="body" value="/views/comment/list.jsp" />
+	</definition>
+	
+</tiles-definitions>

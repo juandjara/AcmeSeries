@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * security.xml
+ *
+ * Copyright (C) 2014 Universidad de Sevilla
+ * Author (A) 2012 Rafael Corchuelo (corchu@us.es)
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"	
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd		
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+    ">
+
+	<!-- Security infrastructure -->
+
+	<bean id="loginService" class="security.LoginService" />
+
+	<bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+
+	<!-- Access control -->
+
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/" access="permitAll" /> 
+
+		<security:intercept-url pattern="/favicon.ico" access="permitAll" /> 
+		<security:intercept-url pattern="/images/**" access="permitAll" /> 
+		<security:intercept-url pattern="/scripts/**" access="permitAll" /> 
+		<security:intercept-url pattern="/styles/**" access="permitAll" /> 
+		<security:intercept-url pattern="/bootstrap/**" access="permitAll" /> 
+		<security:intercept-url pattern="/privacy.html" access="permitAll" />
+		
+		<security:intercept-url pattern="/views/misc/index.jsp" access="permitAll" /> 
+
+		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
+		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
+
+		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
+		<security:intercept-url pattern="/film/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/film/details.do" access="permitAll" /> 
+		<security:intercept-url pattern="/series/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/series/details.do" access="permitAll" /> 
+		<security:intercept-url pattern="/episode/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/episode/details.do" access="permitAll" /> 
+		<security:intercept-url pattern="/role/list.do" access="permitAll"/>
+		<security:intercept-url pattern="/comment/list.do" access="permitAll"/>
+		<security:intercept-url pattern="/comment/replies.do" access="permitAll"/>
+		<security:intercept-url pattern="/comment/details.do" access="permitAll"/>
+		<security:intercept-url pattern="/mark/list.do" access="permitAll"/>
+		
+		<!-- Authenticated users -->
+		<security:intercept-url pattern="/media/search.do" access="!isAnonymous()" /> 
+		<security:intercept-url pattern="/media/query.do" access="!isAnonymous()" /> 
+		<security:intercept-url pattern="/dashboard/generic.do" access="!isAnonymous()" /> 
+		
+		<!-- Only anonymous -->
+		<security:intercept-url pattern="/customer/register.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/producer/register.do" access="isAnonymous()" />
+		
+		<!-- Only CUSTOMER -->
+		<security:intercept-url pattern="/dashboard/customer.do" access="hasRole('CUSTOMER')"/>
+		<security:intercept-url pattern="/comment/customer/create.do" access="permitAll"/>
+		<security:intercept-url pattern="/comment/customer/reply.do" access="permitAll"/>
+		<security:intercept-url pattern="/comment/customer/recommend.do" access="permitAll"/>
+		<security:intercept-url pattern="/comment/customer/inbox.do" access="permitAll"/>
+		<security:intercept-url pattern="/comment/customer/outbox.do" access="permitAll"/>
+		<security:intercept-url pattern="/comment/customer/delete.do" access="permitAll"/>
+		<security:intercept-url pattern="/mark/customer/list.do" access="permitAll"/>
+		<security:intercept-url pattern="/mark/customer/edit.do" access="permitAll"/>
+		
+		<!-- Only PRODUCER -->
+		<security:intercept-url pattern="/dashboard/producer.do" access="hasRole('PRODUCER')"/>
+		<security:intercept-url pattern="/film/producer/addtag.do" access="hasRole('PRODUCER')"/>
+		<security:intercept-url pattern="/film/producer/removetag.do" access="hasRole('PRODUCER')"/>
+		<security:intercept-url pattern="/film/producer/list.do" access="hasRole('PRODUCER')"/>
+		<security:intercept-url pattern="/film/producer/create.do" access="hasRole('PRODUCER')"/>
+		<security:intercept-url pattern="/film/producer/edit.do" access="hasRole('PRODUCER')"/>
+		
+		<security:intercept-url pattern="/series/producer/addtag.do" access="hasRole('PRODUCER')"/>
+		<security:intercept-url pattern="/series/producer/removetag.do" access="hasRole('PRODUCER')"/>
+		<security:intercept-url pattern="/series/producer/list.do" access="hasRole('PRODUCER')"/>
+		<security:intercept-url pattern="/series/producer/create.do" access="hasRole('PRODUCER')"/>
+		<security:intercept-url pattern="/series/producer/edit.do" access="hasRole('PRODUCER')"/>
+		
+		<security:intercept-url pattern="/episode/producer/create.do" access="hasRole('PRODUCER')"/>
+		<security:intercept-url pattern="/episode/producer/edit.do" access="hasRole('PRODUCER')"/>
+		
+		<security:intercept-url pattern="/staff/producer/create.do" access="hasRole('PRODUCER')"/>
+		<security:intercept-url pattern="/staff/producer/edit.do" access="hasRole('PRODUCER')"/>
+		<security:intercept-url pattern="/staff/producer/list.do" access="hasRole('PRODUCER')"/>
+		
+		<security:intercept-url pattern="/role/producer/create.do" access="hasRole('PRODUCER')"/>
+		<security:intercept-url pattern="/role/producer/edit.do" access="hasRole('PRODUCER')"/>
+		
+		<!-- Only ADMIN -->
+		<security:intercept-url pattern="/dashboard/admin.do" access="hasRole('ADMIN')"/>
+		<security:intercept-url pattern="/admin/registernewadmin.do" access="hasRole('ADMIN')"/>
+		<security:intercept-url pattern="/customer/admin/list.do" access="hasRole('ADMIN')"/>
+		<security:intercept-url pattern="/customer/admin/toggleban.do" access="hasRole('ADMIN')"/>
+		
+		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
+
+		<security:form-login 
+			login-page="/security/login.do"
+			password-parameter="password" 
+			username-parameter="username"
+			authentication-failure-url="/security/loginFailure.do" />
+
+		<security:logout 
+			logout-success-url="/" 
+			invalidate-session="true" />
+	</security:http>
+
+</beans>

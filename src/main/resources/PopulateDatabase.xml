@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2014 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount2" class="security.UserAccount">
+		<property name="username" value="customer" />
+		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CUSTOMER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="producer" />
+		<property name="password" value="f18122ddebc4341b4ed758b3f0817da8" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="PRODUCER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="producerHBO" />
+		<property name="password" value="34f4faa8de7c26a028da317801b8dea1" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="PRODUCER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="producerFOX" />
+		<property name="password" value="f3e3bbfed8b43a521eb1a93e8d6a1c2d" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="PRODUCER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="johndoe" />
+		<property name="password" value="6579e96f76baa00787a28653876c6127" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CUSTOMER" />
+				</bean>
+			</list>
+		</property>
+	</bean>	
+	<!-- Actors -->
+	<!-- Administrator -->
+	<bean id="admin" class="domain.Administrator">
+		<property name="name" value="Jordi"/>
+		<property name="surname" value="Cruz"/>
+		<property name="email" value="admin@acmeseries.com"/>
+		<property name="phone" value="666666666"/>
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+	
+	<!-- Customer -->
+	<bean id="customer" class="domain.Customer">
+		<!-- Specific of Actor -->
+		<property name="name" value="Juan"/>
+		<property name="surname" value="D."/>
+		<property name="email" value="juadomjar@alum.us.es"/>
+		<property name="phone" value="555555555"/>
+		<property name="userAccount" ref="userAccount2" />
+		<!-- Specific of Customer -->
+		<property name="isBanned" value="false" /> 
+		<property name="marks">
+			<list>
+				<ref bean="mark1" />
+				<ref bean="mark4" />
+				<ref bean="mark6" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment1"/>
+				<ref bean="comment3"/>
+			</list>
+		</property>
+		<property name="recomendations">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="customer2" class="domain.Customer">
+		<!-- Specific of Actor -->
+		<property name="name" value="John"/>
+		<property name="surname" value="Doe"/>
+		<property name="email" value="johndoe@acme.com"/>
+		<property name="phone" value="111111111"/>
+		<property name="userAccount" ref="userAccount6" />
+		<!-- Specific of Customer -->
+		<property name="isBanned" value="false" /> 
+		<property name="marks">
+			<list>
+				<ref bean="mark2"/>
+				<ref bean="mark3"/>
+				<ref bean="mark5"/>
+				<ref bean="mark7"/>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment2"/>
+			</list>
+		</property>
+		<property name="recomendations">
+			<list>
+				<ref bean="comment3"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- ProducerCompany -->
+	<bean id="producer1" class="domain.ProducerCompany">
+		<property name="name" value="Team15"/>
+		<property name="surname" value="Inc."/>
+		<property name="email" value="info@team15.es"/>
+		<property name="phone" value="444444444"/>
+		<property name="fundationDate" value="10/10/2014"/>
+		<property name="webpage" value="http://team15.es"/>
+		<property name="userAccount" ref="userAccount3"/>
+		<property name="multimedias">
+			<list>
+				<ref bean="film1"/>
+				<ref bean="tvserie2"/>
+			</list>
+		</property>		
+	</bean>
+	<bean id="producer2" class="domain.ProducerCompany">
+		<property name="name" value="FOX 2000 Pictures"/>
+		<property name="surname" value="Inc."/>
+		<property name="email" value="contact@foxmovies.com"/>
+		<property name="phone" value="333333333"/>
+		<property name="fundationDate" value="31/05/1935"/>
+		<property name="webpage" value="http://www.foxmovies.com"/>
+		<property name="userAccount" ref="userAccount5"/>
+		<property name="multimedias">
+			<list>
+				<ref bean="film2"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="producer3" class="domain.ProducerCompany">
+		<property name="name" value="HBO"/>
+		<property name="surname" value="Inc."/>
+		<property name="email" value="general@hbo.com"/>
+		<property name="phone" value="222222222"/>
+		<property name="fundationDate" value="08/11/1972"/>
+		<property name="webpage" value="http://www.hbo.com"/>
+		<property name="userAccount" ref="userAccount4"/>
+		<property name="multimedias">
+			<list>
+				<ref bean="tvserie1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Staff -->
+	<bean id="staff1" class="domain.Staff">
+		<property name="name" value="Juan"/>
+		<property name="surname" value="D."/>
+		<property name="email" value="juadomjar@alum.us.es"/>
+		<property name="roles">
+			<list>
+				<ref bean="role1"/>
+				<ref bean="role2"/>
+			</list>
+		</property>
+		<property name="producer" ref="producer1"/>
+	</bean>
+	<bean id="staff2" class="domain.Staff">
+		<property name="name" value="The 4"/>
+		<property name="surname" value="Of Team 15"/>
+		<property name="email" value="info@team15.es"/>
+		<property name="roles">
+			<list>
+				<ref bean="role3"/>
+			</list>
+		</property>
+		<property name="producer" ref="producer1"/>
+	</bean>
+	<bean id="staff3" class="domain.Staff">
+		<property name="name" value="David"/>
+		<property name="surname" value="Fincher"/>
+		<property name="email" value="david@directors.com"/>
+		<property name="roles">
+			<list><ref bean="role4"/></list>
+		</property>
+		<property name="producer" ref="producer2"/>
+	</bean>
+	<bean id="staff4" class="domain.Staff">
+		<property name="name" value="Jim"/>
+		<property name="surname" value="Uhls"/>
+		<property name="email" value="jim@composers.com"/>
+		<property name="roles">
+			<list><ref bean="role5"/></list>
+		</property>
+		<property name="producer" ref="producer2"/>
+	</bean>
+	<bean id="staff5" class="domain.Staff">
+		<property name="name" value="Brad"/>
+		<property name="surname" value="Pit"/>
+		<property name="email" value="brad@actors.com"/>
+		<property name="roles">
+			<list><ref bean="role6"/></list>
+		</property>
+		<property name="producer" ref="producer2"/>
+	</bean>
+	<bean id="staff6" class="domain.Staff">
+		<property name="name" value="Chuck"/>
+		<property name="surname" value="Palahniuk"/>
+		<property name="email" value="chuck@writers.com"/>
+		<property name="roles">
+			<list><ref bean="role7"/></list>
+		</property>
+		<property name="producer" ref="producer2"/>
+	</bean>
+	<bean id="staff7" class="domain.Staff">
+		<property name="name" value="Daniel"/>
+		<property name="surname" value="B. Weiss"/>
+		<property name="email" value="dani@directors.com"/>
+		<property name="roles">
+			<list><ref bean="role8"/></list>
+		</property>
+		<property name="producer" ref="producer3"/>
+	</bean>
+	<bean id="staff8" class="domain.Staff">
+		<property name="name" value="Sean"/>
+		<property name="surname" value="Bean"/>
+		<property name="email" value="sb@actors.com"/>
+		<property name="roles">
+			<list><ref bean="role9"/></list>
+		</property>
+		<property name="producer" ref="producer3"/>
+	</bean>
+	<bean id="staff9" class="domain.Staff">
+		<property name="name" value="George"/>
+		<property name="surname" value="R.R. Martin"/>
+		<property name="email" value="george@writers.com"/>
+		<property name="roles">
+			<list><ref bean="role10"/></list>
+		</property>
+		<property name="producer" ref="producer3"/>
+	</bean>
+	
+	<!-- Film -->
+	<bean id="film1" class="domain.Film">
+		<!-- Specific of Multimedia -->
+		<property name="title" value="Test film"/>
+		<property name="genres" value="Test Genre"/>
+		<property name="sinopsis" value="This is test"/>
+		<property name="releaseDate" value="04/09/2015 09:00:00"/>
+		<property name="producerCompany" ref="producer1"/>
+		<property name="distributionCompany" value="Team15"/>
+		<property name="originCountry" value="Spain"/>
+		<property name="tags">
+			<list>
+				<value type="java.lang.String">DP</value>
+				<value type="java.lang.String">TryHard</value>
+				<value type="java.lang.String">Enterprise</value>
+				<value type="java.lang.String">Professional</value>
+			</list>
+		</property>
+		<property name="roles">
+			<list>
+				<ref bean="role1"/>
+				<ref bean="role2"/>
+				<ref bean="role3"/>
+			</list>
+		</property>
+		<!-- Specific of Content -->
+		<property name="marks">
+			<list>
+				<ref bean="mark6" />
+				<ref bean="mark7" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<!-- Specific of Film -->
+		<property name="runningTime" value="999"/>
+		<property name="budget" value="0.00"/>
+		<property name="boxOffice" value="1000.00"/>
+	</bean>
+	<bean id="film2" class="domain.Film">
+		<!-- Specific of Multimedia -->
+		<property name="title" value="Fight Club"/>
+		<property name="genres" value="Drama"/>
+		<property name="sinopsis" value="An insomniac office worker, looking for a way to change his life, crosses paths with a devil-may-care soap maker, forming an underground fight club that evolves into something much, much more..."/>
+		<property name="releaseDate" value="05/11/1999 00:00:00"/>
+		<property name="producerCompany" ref="producer2" />
+		<property name="distributionCompany" value="20th Century Fox"/>
+		<property name="originCountry" value="USA"/>
+		<property name="tags">
+			<list>
+				<value type="java.lang.String">Fight</value>
+				<value type="java.lang.String">90sFilm</value>
+				<value type="java.lang.String">Tyler</value>
+				<value type="java.lang.String">Soap</value>
+			</list>
+		</property>
+		<property name="roles">
+			<list>
+				<ref bean="role4"/>
+				<ref bean="role5"/>
+				<ref bean="role6"/>
+				<ref bean="role7"/>
+			</list>
+		</property>
+		<!-- Specific of Content -->
+		<property name="marks">
+			<list>
+				<ref bean="mark1"/>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment1"/>
+				<ref bean="comment2"/>
+				<ref bean="comment3"/>
+			</list>
+		</property>
+		<!-- Specific of Film -->
+		<property name="runningTime" value="139"/>
+		<property name="budget" value="63000000.00"/>
+		<property name="boxOffice" value="137000000.00"/>
+	</bean>
+	
+	<!-- TVSerie -->
+	<bean id="tvserie1" class="domain.TVSerie">
+		<!-- Specific of Multimedia -->
+		<property name="title" value="Game of thrones"/>
+		<property name="genres" value="Drama, medieval, fantasy"/>
+		<property name="sinopsis" value="All men must die"/>
+		<property name="releaseDate" value="17/04/2011 00:00:00"/>
+		<property name="producerCompany">
+			<ref bean="producer3"/>
+		</property>
+		<property name="distributionCompany" value="HBO"/>
+		<property name="originCountry" value="United States"/>
+		<property name="tags">
+			<list>
+				<value type="java.lang.String">War</value>
+				<value type="java.lang.String">Dragons</value>
+				<value type="java.lang.String">Fantasy</value>
+				<value type="java.lang.String">TV</value>
+			</list>
+		</property>
+		<property name="roles">
+			<list>
+				<ref bean="role8"/>
+				<ref bean="role9"/>
+				<ref bean="role10"/>
+			</list>
+		</property>
+		<!-- Specific of Content -->
+		<property name="marks">
+			<list>
+				<ref bean="mark4" />
+				<ref bean="mark5" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<!-- Specific of TVSerie -->
+		<property name="originalChannel" value="HBO"/>
+		<property name="episodes">
+			<list>
+				<ref bean="episode1"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="tvserie2" class="domain.TVSerie">
+		<!-- Specific of Multimedia -->
+		<property name="title" value="Test serie"/>
+		<property name="genres" value="Drama, thriller"/>
+		<property name="sinopsis" value="sino"/>
+		<property name="releaseDate" value="17/07/2015 00:00:00"/>
+		<property name="producerCompany">
+			<ref bean="producer1"/>
+		</property>
+		<property name="distributionCompany" value="Team15"/>
+		<property name="originCountry" value="españita"/>
+		<property name="tags">
+			<list>
+				<value type="java.lang.String">Terror</value>
+				<value type="java.lang.String">Hurry</value>
+				<value type="java.lang.String">Work</value>
+				<value type="java.lang.String">Much work</value>
+			</list>
+		</property>
+		<property name="roles">
+			<list>
+			</list>
+		</property>
+		<!-- Specific of Content -->
+		<property name="marks">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<!-- Specific of TVSerie -->
+		<property name="originalChannel" value="DP"/>
+		<property name="episodes">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Episode -->
+	<bean id="episode1" class="domain.Episode">
+		<property name="title" value="GoT-S01-E01"/>
+		<property name="episodeNumber" value="1"/>
+		<property name="seasonNumber" value="1"/>
+		<property name="runningTime" value="60"/>
+		<property name="serie">
+			<ref bean="tvserie1"/>
+		</property>
+		<!-- Specific of Content -->
+		<property name="marks">
+			<list>
+				<ref bean="mark2" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="episode2" class="domain.Episode">
+		<property name="title" value="GoT-S01-E02"/>
+		<property name="episodeNumber" value="2"/>
+		<property name="seasonNumber" value="1"/>
+		<property name="runningTime" value="60"/>
+		<property name="serie">
+			<ref bean="tvserie1"/>
+		</property>
+		<!-- Specific of Content -->
+		<property name="marks">
+			<list>
+				<ref bean="mark3" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="episode3" class="domain.Episode">
+		<property name="title" value="GoT-S02-E01"/>
+		<property name="episodeNumber" value="1"/>
+		<property name="seasonNumber" value="2"/>
+		<property name="runningTime" value="60"/>
+		<property name="serie">
+			<ref bean="tvserie1"/>
+		</property>
+		<!-- Specific of Content -->
+		<property name="marks">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Role -->
+	<bean id="role1" class="domain.Role">
+		<property name="role" value="WRITER"/>
+		<property name="staff" ref="staff1"/>
+		<property name="multimedia" ref="film1"/>
+	</bean>
+	<bean id="role2" class="domain.Role">
+		<property name="role" value="DIRECTOR"/>
+		<property name="staff" ref="staff1"/>
+		<property name="multimedia" ref="film1"/>
+	</bean>
+	<bean id="role3" class="domain.Role">
+		<property name="role" value="ACTOR"/>
+		<property name="staff" ref="staff2"/>
+		<property name="multimedia" ref="film1"/>
+	</bean>
+	<bean id="role4" class="domain.Role">
+		<property name="role" value="DIRECTOR"/>
+		<property name="staff" ref="staff3"/>
+		<property name="multimedia" ref="film2"/>
+	</bean>
+	<bean id="role5" class="domain.Role">
+		<property name="role" value="COMPOSER"/>
+		<property name="staff" ref="staff4"/>
+		<property name="multimedia" ref="film2"/>
+	</bean>
+	<bean id="role6" class="domain.Role">
+		<property name="role" value="ACTOR"/>
+		<property name="staff" ref="staff5"/>
+		<property name="multimedia" ref="film2"/>
+	</bean>
+	<bean id="role7" class="domain.Role">
+		<property name="role" value="WRITER"/>
+		<property name="staff" ref="staff6"/>
+		<property name="multimedia" ref="film2"/>
+	</bean>
+	<bean id="role8" class="domain.Role">
+		<property name="role" value="DIRECTOR"/>
+		<property name="staff" ref="staff7"/>
+		<property name="multimedia" ref="tvserie1"/>
+	</bean>
+	<bean id="role9" class="domain.Role">
+		<property name="role" value="ACTOR"/>
+		<property name="staff" ref="staff8"/>
+		<property name="multimedia" ref="tvserie1"/>
+	</bean>
+	<bean id="role10" class="domain.Role">
+		<property name="role" value="WRITER"/>
+		<property name="staff" ref="staff9"/>
+		<property name="multimedia" ref="tvserie1"/>
+	</bean>
+	
+	<!-- Comment -->
+	<bean id="comment1" class="domain.Comment">
+		<property name="text" value="I'm Jack's inflamed sense of rejection." />
+		<property name="creationDate" value="15/06/2014 23:30" />
+		<!-- parent: null -->
+		<property name="children">
+			<list>
+				<ref bean="comment2"/>
+			</list>
+		</property>
+		<!-- receiver: null -->
+		<property name="sender" ref="customer" />
+		<property name="content" ref="film2" />
+	</bean>
+	<bean id="comment2" class="domain.Comment">
+		<property name="text" value="Reply." />
+		<property name="creationDate" value="16/06/2014 23:30" />
+		<property name="parent" ref="comment1" />
+		<property name="children">
+			<list>
+			</list>
+		</property>
+		<!-- receiver: null -->
+		<property name="sender" ref="customer2" />
+		<property name="content" ref="film2" />
+	</bean>
+	<bean id="comment3" class="domain.Comment">
+		<property name="text" value="Hey Doe, check this!" />
+		<property name="creationDate" value="14/06/2014 23:30" />
+		<!-- parent: null -->
+		<property name="children">
+			<list>
+			</list>
+		</property>
+		<property name="receiver" ref="customer2" />
+		<property name="sender" ref="customer" />
+		<property name="content" ref="film2" />
+	</bean>
+	
+	<!-- Mark -->
+	<bean id="mark1" class="domain.Mark">
+		<property name="isViewed" value="true" />
+		<property name="score" value="5"/>
+		<property name="customer" ref="customer"/>
+		<property name="content" ref="film2" />
+	</bean>
+	<bean id="mark2" class="domain.Mark">
+		<property name="isViewed" value="true" />
+		<property name="score" value="4"/>
+		<property name="customer" ref="customer2"/>
+		<property name="content" ref="episode1" />
+	</bean>
+	<bean id="mark3" class="domain.Mark">
+		<property name="isViewed" value="true" />
+		<property name="score" value="3"/>
+		<property name="customer" ref="customer2"/>
+		<property name="content" ref="episode2" />
+	</bean>
+	<bean id="mark4" class="domain.Mark">
+		<property name="isViewed" value="true" />
+		<property name="score" value="4"/>
+		<property name="customer" ref="customer"/>
+		<property name="content" ref="tvserie1" />
+	</bean>
+	<bean id="mark5" class="domain.Mark">
+		<property name="isViewed" value="true" />
+		<property name="score" value="5"/>
+		<property name="customer" ref="customer2"/>
+		<property name="content" ref="tvserie1" />
+	</bean>
+	<bean id="mark6" class="domain.Mark">
+		<property name="isViewed" value="true" />
+		<property name="score" value="5"/>
+		<property name="customer" ref="customer"/>
+		<property name="content" ref="film1" />
+	</bean>
+	<bean id="mark7" class="domain.Mark">
+		<property name="isViewed" value="true" />
+		<property name="score" value="5"/>
+		<property name="customer" ref="customer2"/>
+		<property name="content" ref="film1" />
+	</bean>
+	
+</beans>
