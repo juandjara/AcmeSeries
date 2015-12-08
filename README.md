@@ -6,7 +6,7 @@ This project uses the following technologies:
 - Spring Data
 - Spring MVC
 - Spring Web
-- Hbiernate
+- Hibernate
 - MySQL
 - Bootstrap
 - JQuery
